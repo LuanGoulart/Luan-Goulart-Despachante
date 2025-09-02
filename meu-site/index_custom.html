@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento via Pix - Luan Goulart Despachante</title>
+  <style>
+    :root {
+      --cor-fundo: linear-gradient(135deg, #000000, #0a1f3c, #004466);
+      --cor-card: linear-gradient(145deg, #101010, #1b1b1b);
+      --cor-borda: #004466;
+      --cor-texto: #e5e5e5;
+      --cor-destaque: #00d4ff;
+      --fonte: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      font-family: var(--fonte);
+      background: var(--cor-fundo);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .card {
+      background: var(--cor-card);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 
+        inset 1px 1px 2px rgba(255,255,255,0.05),
+        0 8px 25px rgba(0,0,0,0.7),
+        0 0 12px rgba(0,212,255,0.2);
+      text-align: center;
+      max-width: 460px;
+      width: 100%;
+      border: 1px solid var(--cor-borda);
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      margin-bottom: 5px;
+      color: var(--cor-texto);
+      text-shadow: 0 0 8px rgba(0, 212, 255, 0.7);
+    }
+
+    p {
+      color: var(--cor-texto);
+      margin: 8px 0;
+      font-size: 15px;
+    }
+
+    h3 {
+      color: var(--cor-destaque);
+      margin-top: 28px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 1.5px;
+    }
+
+    .pix {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--cor-destaque);
+      margin: 18px 0;
+      text-shadow: 0 0 8px rgba(0, 212, 255, 0.8);
+      word-break: break-word;
+    }
+
+    button {
+      background: linear-gradient(145deg, #00d4ff, #0077aa);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,212,255,0.4);
+      width: 100%;
+    }
+
+    button:hover {
+      background: linear-gradient(145deg, #33e6ff, #0099cc);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,212,255,0.6);
+    }
+
+    img.logo {
+      width: 180px;
+      margin-bottom: 24px;
+      border-radius: 14px;
+      border: 2px solid var(--cor-destaque);
+      box-shadow: 0 0 15px rgba(0,212,255,0.5);
+      background: #fff;
+      object-fit: contain;
+    }
+
+    .qr {
+      margin: 18px 0;
+      border-radius: 14px;
+      padding: 10px;
+      background: #fff;
+      display: inline-block;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+    }
+
+    img.qr-img {
+      width: 200px;
+      height: 200px;
+      border-radius: 12px;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img 
+      src="imagens/logo_Despachante.jpg" 
+      alt="Logo Luan Goulart Despachante" 
+      class="logo"
+    />
+    <h2>💳 Luan Goulart Despachante</h2>
+    <p>Contato: (35) 99979-2207</p>
+    <p>Praça Doutor José Braz, 55<br>Morro Chic - Itajubá, MG</p>
+
+    <h3>Chave Pix</h3>
+    <p class="pix" id="pix">(35) 99979-2207</p>
+    <button onclick="copiarPix()">📋 Copiar Chave Pix</button>
+
+    <h4>Pix QR Code</h4>
+    <div class="qr">
+      <img 
+        src="imagens/qr_pix_logo.jpg" 
+        alt="QR Code Pix com logo" 
+        class="qr-img"
+      />
+    </div>
+
+    <h3>Avalie no Google Maps</h3>
+    <div class="qr">
+      <a href="https://g.page/r/Cep0zo3eSEVFEAE/review" target="_blank">
+        <img 
+          src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://g.page/r/Cep0zo3eSEVFEAE/review" 
+          alt="QR Code para avaliação no Google Maps" 
+          class="qr-img"
+        />
+      </a>
+    </div>
+  </div>
+
+  <script>
+    function copiarPix() {
+      const chave = document.getElementById("pix").innerText;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(chave).then(() => {
+          alert("✅ Chave Pix copiada!");
+        });
+      } else {
+        const textarea = document.createElement("textarea");
+        textarea.value = chave;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        alert("✅ Chave Pix copiada!");
+      }
+    }
+  </script>
+</body>
+</html>
